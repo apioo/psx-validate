@@ -1,0 +1,27 @@
+{
+  "name": "psx/validate",
+  "description": "Validate complex data structures",
+  "keywords": ["validation", "json"],
+  "homepage": "http://phpsx.org",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Christoph Kappestein",
+      "email": "christoph.kappestein@gmail.com",
+      "homepage": "http://christoph.kappestein.com/"
+    }
+  ],
+  "require": {
+    "php": ">=5.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "PSX\\Validate\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PSX\\Validate\\Tests\\": "tests/"
+    }
+  }
+}
