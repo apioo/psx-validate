@@ -20,7 +20,8 @@
 
 namespace PSX\Validate\Tests\Filter;
 
-use PSX\Framework\Test\DbTestCase;
+use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Schema\Schema;
 use PSX\Validate\Filter\InColumn;
 
 /**
@@ -30,16 +31,21 @@ use PSX\Validate\Filter\InColumn;
  * @license http://www.apache.org/licenses/LICENSE-2.0
  * @link    http://phpsx.org
  */
-class InColumnTest extends DbTestCase
+class InColumnTest extends \PHPUnit_Extensions_Database_TestCase
 {
     public function getDataSet()
     {
-        return $this->createFlatXMLDataSet(__DIR__ . '/../../../Sql/Tests/table_fixture.xml');
+        return $this->createFlatXMLDataSet(__DIR__ . '/../fixture.xml');
+    }
+
+    public function getConnection()
+    {
+        return $this->createDefaultDBConnection(getConnection()->getWrappedConnection(), '');
     }
 
     public function testFilter()
     {
-        $filter = new InColumn($this->connection, 'psx_handler_comment', 'id');
+        $filter = new InColumn(getConnection(), 'psx_filter', 'id');
 
         $this->assertEquals(true, $filter->apply(1));
         $this->assertEquals(false, $filter->apply(32));
