@@ -1,6 +1,6 @@
 {
   "name": "psx/validate",
-  "description": "Validate complex data structures",
+  "description": "Validate data through a filter system",
   "keywords": ["validation", "filter"],
   "homepage": "http://phpsx.org",
   "license": "Apache-2.0",
