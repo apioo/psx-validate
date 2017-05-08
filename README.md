@@ -3,13 +3,16 @@ PSX Validate
 
 ## About
 
-Validation library which validates arbitrary data using a flxeible filter
+Validation library which validates arbitrary data using a flexible filter
 system.
 
 ## Usage
 
 ```php
 <?php
+
+use PSX\Validate\Filter;
+use PSX\Validate\Validate;
 
 $validate = new Validate();
 $result   = $validate->validate($data, Validate::TYPE_STRING, [new Filter\Alnum(), new Filter\Length(3, 255)]);
