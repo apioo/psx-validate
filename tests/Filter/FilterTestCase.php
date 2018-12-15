@@ -20,6 +20,8 @@
 
 namespace PSX\Validate\Tests\Filter;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * FilterTestCase
  *
@@ -27,7 +29,7 @@ namespace PSX\Validate\Tests\Filter;
  * @license http://www.apache.org/licenses/LICENSE-2.0
  * @link    http://phpsx.org
  */
-class FilterTestCase extends \PHPUnit_Framework_TestCase
+class FilterTestCase extends TestCase
 {
     protected function assertErrorMessage($msg)
     {
