@@ -40,7 +40,7 @@ class Url extends FilterAbstract
      */
     public function apply($value)
     {
-        return filter_var((string) $value, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED);
+        return filter_var((string) $value, FILTER_VALIDATE_URL);
     }
 
     public function getErrorMessage()
