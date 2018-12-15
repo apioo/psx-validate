@@ -20,6 +20,7 @@
 
 namespace PSX\Validate\Tests;
 
+use PHPUnit\Framework\TestCase;
 use PSX\Validate\Filter;
 use PSX\Validate\Validate;
 
@@ -30,7 +31,7 @@ use PSX\Validate\Validate;
  * @license http://www.apache.org/licenses/LICENSE-2.0
  * @link    http://phpsx.org
  */
-class ValidateTest extends \PHPUnit_Framework_TestCase
+class ValidateTest extends TestCase
 {
     protected $successFilter;
     protected $failureFilter;

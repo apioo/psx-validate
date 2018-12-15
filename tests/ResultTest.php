@@ -20,6 +20,7 @@
 
 namespace PSX\Validate\Tests;
 
+use PHPUnit\Framework\TestCase;
 use PSX\Validate\Result;
 
 /**
@@ -29,7 +30,7 @@ use PSX\Validate\Result;
  * @license http://www.apache.org/licenses/LICENSE-2.0
  * @link    http://phpsx.org
  */
-class ResultTest extends \PHPUnit_Framework_TestCase
+class ResultTest extends TestCase
 {
     public function testResult()
     {
