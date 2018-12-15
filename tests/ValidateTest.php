@@ -22,6 +22,7 @@ namespace PSX\Validate\Tests;
 
 use PHPUnit\Framework\TestCase;
 use PSX\Validate\Filter;
+use PSX\Validate\FilterAbstract;
 use PSX\Validate\Validate;
 
 /**
@@ -40,13 +41,13 @@ class ValidateTest extends TestCase
 
     protected function setUp()
     {
-        $this->successFilter = $this->getMockBuilder('PSX\Validate\FilterAbstract')
+        $this->successFilter = $this->getMockBuilder(FilterAbstract::class)
             ->getMock();
 
-        $this->failureFilter = $this->getMockBuilder('PSX\Validate\FilterAbstract')
+        $this->failureFilter = $this->getMockBuilder(FilterAbstract::class)
             ->getMock();
 
-        $this->responseFilter = $this->getMockBuilder('PSX\Validate\FilterAbstract')
+        $this->responseFilter = $this->getMockBuilder(FilterAbstract::class)
             ->getMock();
 
         $this->validate = new Validate();
