@@ -39,7 +39,7 @@ class ValidateTest extends TestCase
     protected $responseFilter;
     protected $validate;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->successFilter = $this->getMockBuilder(FilterAbstract::class)
             ->getMock();
@@ -51,10 +51,6 @@ class ValidateTest extends TestCase
             ->getMock();
 
         $this->validate = new Validate();
-    }
-
-    protected function tearDown()
-    {
     }
 
     public function testApply()
