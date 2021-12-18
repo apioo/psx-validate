@@ -1,5 +1,5 @@
-PSX Validate
-===
+
+# Validate
 
 ## About
 
