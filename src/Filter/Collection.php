@@ -21,6 +21,7 @@
 namespace PSX\Validate\Filter;
 
 use PSX\Validate\FilterAbstract;
+use PSX\Validate\FilterInterface;
 
 /**
  * Collection
@@ -32,12 +33,12 @@ use PSX\Validate\FilterAbstract;
 class Collection extends FilterAbstract
 {
     /**
-     * @var \PSX\Validate\FilterInterface[]
+     * @var FilterInterface[]
      */
-    protected $filters;
+    private array $filters;
 
     /**
-     * @param \PSX\Validate\FilterInterface[] $filters
+     * @param FilterInterface[] $filters
      */
     public function __construct(array $filters)
     {
@@ -46,11 +47,8 @@ class Collection extends FilterAbstract
 
     /**
      * Returns true if all filters allow the value
-     *
-     * @param mixed $value
-     * @return boolean
      */
-    public function apply($value)
+    public function apply(mixed $value): mixed
     {
         $modified = false;
 
@@ -69,7 +67,7 @@ class Collection extends FilterAbstract
         return $modified ? $value : true;
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s contains invalid values';
     }

@@ -32,12 +32,9 @@ use PSX\Validate\FilterAbstract;
 class Sha1 extends FilterAbstract
 {
     /**
-     * Returns an sha1 representation of $value
-     *
-     * @param mixed $value
-     * @return string
+     * Returns a sha1 representation of $value
      */
-    public function apply($value)
+    public function apply(mixed $value): string
     {
         return sha1((string) $value);
     }

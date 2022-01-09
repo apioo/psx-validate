@@ -29,8 +29,5 @@ namespace PSX\Validate;
  */
 interface ValidatorAwareInterface
 {
-    /**
-     * @param \PSX\Validate\ValidatorInterface $validator
-     */
-    public function setValidator(ValidatorInterface $validator);
+    public function setValidator(ValidatorInterface $validator): void;
 }

@@ -34,16 +34,13 @@ class Ip extends FilterAbstract
     /**
      * Returns true if $value is a valid ip address and not in the private
      * range else false. You can use this method as filter
-     *
-     * @param mixed $value
-     * @return string|false
      */
-    public function apply($value)
+    public function apply(mixed $value): mixed
     {
         return filter_var((string) $value, FILTER_VALIDATE_IP);
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s must be a valid ip format (80.132.95.75)';
     }

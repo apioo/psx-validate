@@ -32,17 +32,17 @@ use PSX\Validate\FilterAbstract;
  */
 class DateTime extends FilterAbstract
 {
-    protected $format;
+    private ?string $format;
 
-    public function __construct($format = null)
+    public function __construct(?string $format = null)
     {
         $this->format = $format;
     }
 
-    public function apply($value)
+    public function apply(mixed $value): mixed
     {
         try {
-            $date = $value instanceof \DateTime ? $value : new \DateTime((string) $value);
+            $date = $value instanceof \DateTimeInterface ? $value : new \DateTime((string) $value);
 
             if ($this->format === null) {
                 return $date;
@@ -54,7 +54,7 @@ class DateTime extends FilterAbstract
         }
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s has not a valid date format';
     }

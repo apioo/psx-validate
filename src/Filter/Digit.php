@@ -33,16 +33,13 @@ class Digit extends FilterAbstract
 {
     /**
      * Returns true if $value is a digit else false
-     *
-     * @param mixed $value
-     * @return boolean
      */
-    public function apply($value)
+    public function apply(mixed $value): bool
     {
         return ctype_digit((string) $value);
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s must contain only numeric (0-9) signs';
     }

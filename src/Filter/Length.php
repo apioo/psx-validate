@@ -31,10 +31,10 @@ use PSX\Validate\FilterAbstract;
  */
 class Length extends FilterAbstract
 {
-    protected $min;
-    protected $max;
+    protected int|float $min;
+    protected int|float|null $max;
 
-    public function __construct($min, $max = null)
+    public function __construct(int|float $min, int|float|null $max = null)
     {
         $this->min = $min;
         $this->max = $max;
@@ -44,11 +44,8 @@ class Length extends FilterAbstract
      * If $value is an integer or float the $min and $max value is meaned as
      * the current value. If it is a string it is meaned as the length of
      * $value. If its an array $min and $max relate to the array size.
-     *
-     * @param mixed $value
-     * @return boolean
      */
-    public function apply($value)
+    public function apply(mixed $value): bool
     {
         if (is_int($value) || is_float($value)) {
             return $this->compare($value);
@@ -61,7 +58,7 @@ class Length extends FilterAbstract
         }
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         if ($this->max === null) {
             return '%s has an invalid length max ' . $this->min . ' signs';
@@ -70,7 +67,7 @@ class Length extends FilterAbstract
         }
     }
 
-    private function compare($len)
+    private function compare($len): bool
     {
         if ($this->max === null) {
             return $len <= $this->min;

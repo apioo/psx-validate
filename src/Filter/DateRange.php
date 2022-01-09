@@ -31,10 +31,10 @@ use InvalidArgumentException;
  */
 class DateRange extends DateTime
 {
-    protected $from;
-    protected $to;
+    private ?\DateTimeInterface $from;
+    private ?\DateTimeInterface $to;
 
-    public function __construct(\DateTime $from = null, \DateTime $to = null, $format = null)
+    public function __construct(\DateTimeInterface $from = null, \DateTimeInterface $to = null, ?string $format = null)
     {
         parent::__construct($format);
 
@@ -46,11 +46,11 @@ class DateRange extends DateTime
         $this->to   = $to;
     }
 
-    public function apply($value)
+    public function apply(mixed $value): mixed
     {
         $date = parent::apply($value);
         
-        if ($date instanceof \DateTime) {
+        if ($date instanceof \DateTimeInterface) {
             $inRange = false;
 
             if ($this->from !== null && $this->to !== null) {
@@ -67,7 +67,7 @@ class DateRange extends DateTime
         }
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         if ($this->from !== null && $this->to !== null) {
             return '%s is not between ' . $this->from->format('Y-m-d H:i:s') . ' and ' . $this->to->format('Y-m-d H:i:s');
@@ -75,6 +75,8 @@ class DateRange extends DateTime
             return '%s is not greater or equal ' . $this->from->format('Y-m-d H:i:s');
         } elseif ($this->from === null && $this->to !== null) {
             return '%s is not lower or equal ' . $this->to->format('Y-m-d H:i:s');
+        } else {
+            return null;
         }
     }
 }

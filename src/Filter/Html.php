@@ -31,11 +31,11 @@ use PSX\Validate\FilterAbstract;
  */
 class Html extends FilterAbstract
 {
-    private $quoteStyle;
-    private $charset;
-    private $doubleEncode;
+    private int $quoteStyle;
+    private string $charset;
+    private bool $doubleEncode;
 
-    public function __construct($quoteStyle = ENT_COMPAT, $charset = 'UTF-8', $doubleEncode = true)
+    public function __construct(int $quoteStyle = ENT_COMPAT, string $charset = 'UTF-8', bool $doubleEncode = true)
     {
         $this->quoteStyle   = $quoteStyle;
         $this->charset      = $charset;
@@ -44,11 +44,8 @@ class Html extends FilterAbstract
 
     /**
      * Converts special characters to HTML entities
-     *
-     * @param mixed $value
-     * @return string
      */
-    public function apply($value)
+    public function apply(mixed $value): string
     {
         return htmlspecialchars((string) $value, $this->quoteStyle, $this->charset, $this->doubleEncode);
     }

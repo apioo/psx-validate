@@ -31,7 +31,7 @@ use PSX\Validate\FilterAbstract;
  */
 class KeyExists extends FilterAbstract
 {
-    private $container;
+    private array $container;
 
     public function __construct(array $container)
     {
@@ -40,18 +40,15 @@ class KeyExists extends FilterAbstract
 
     /**
      * Returns true if value is an key in the array $this->container else false
-     *
-     * @param mixed $value
-     * @return boolean
      */
-    public function apply($value)
+    public function apply(mixed $value): bool
     {
         $key = (string) $value;
 
         return isset($this->container[$key]);
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s is not valid value';
     }

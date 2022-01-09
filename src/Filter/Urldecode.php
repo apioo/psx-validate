@@ -33,11 +33,8 @@ class Urldecode extends FilterAbstract
 {
     /**
      * Returns an urldecode representation of $value
-     *
-     * @param mixed $value
-     * @return string
      */
-    public function apply($value)
+    public function apply(mixed $value): string
     {
         return urldecode((string) $value);
     }

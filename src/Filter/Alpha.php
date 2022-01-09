@@ -33,16 +33,13 @@ class Alpha extends FilterAbstract
 {
     /**
      * Returns true if $value contains only alphabetic signs else false
-     *
-     * @param mixed $value
-     * @return boolean
      */
-    public function apply($value)
+    public function apply(mixed $value): bool
     {
         return ctype_alpha((string) $value);
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s must contain only alphabetic (A-Z) signs';
     }

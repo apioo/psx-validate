@@ -32,7 +32,7 @@ use PSX\Validate\FilterInterface;
  */
 class ArrayFilter extends FilterAbstract
 {
-    protected $filter;
+    private FilterInterface $filter;
 
     public function __construct(FilterInterface $filter)
     {
@@ -42,11 +42,8 @@ class ArrayFilter extends FilterAbstract
     /**
      * Returns true if all values in $value apply to the filter. If the parent
      * filter has changed an value the modified array gets returned
-     *
-     * @param mixed $value
-     * @return array|boolean
      */
-    public function apply($value)
+    public function apply(mixed $value): array|bool
     {
         $data     = array();
         $modified = false;
@@ -72,7 +69,7 @@ class ArrayFilter extends FilterAbstract
         return $modified ? $data : true;
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s contains invalid values';
     }

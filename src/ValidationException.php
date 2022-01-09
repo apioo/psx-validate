@@ -31,10 +31,10 @@ use RuntimeException;
  */
 class ValidationException extends RuntimeException
 {
-    protected $title;
-    protected $result;
+    private ?string $title;
+    private Result $result;
 
-    public function __construct($message, $title, Result $result)
+    public function __construct(string $message, ?string $title, Result $result)
     {
         parent::__construct($message);
 
@@ -42,12 +42,12 @@ class ValidationException extends RuntimeException
         $this->result = $result;
     }
 
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function getResult()
+    public function getResult(): Result
     {
         return $this->result;
     }

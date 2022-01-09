@@ -29,7 +29,7 @@ namespace PSX\Validate;
  */
 abstract class FilterAbstract implements FilterInterface
 {
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return null;
     }

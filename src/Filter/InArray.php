@@ -31,7 +31,7 @@ use PSX\Validate\FilterAbstract;
  */
 class InArray extends FilterAbstract
 {
-    private $container;
+    private array $container;
 
     public function __construct(array $container)
     {
@@ -40,16 +40,13 @@ class InArray extends FilterAbstract
 
     /**
      * Returns true if value is in the array $this->container else false
-     *
-     * @param mixed $value
-     * @return boolean
      */
-    public function apply($value)
+    public function apply(mixed $value): bool
     {
         return in_array((string) $value, $this->container);
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s is not a valid value';
     }

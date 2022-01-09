@@ -32,17 +32,14 @@ use PSX\Validate\FilterAbstract;
 class Alnum extends FilterAbstract
 {
     /**
-     * Returns true if $value contains only alphanmeric signs else false
-     *
-     * @param mixed $value
-     * @return boolean
+     * Returns true if $value contains only alphanumeric signs else false
      */
-    public function apply($value)
+    public function apply(mixed $value): bool
     {
         return ctype_alnum((string) $value);
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s must contain only alphabetic (A-Z) or numeric (0-9) signs';
     }

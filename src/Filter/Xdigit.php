@@ -33,16 +33,13 @@ class Xdigit extends FilterAbstract
 {
     /**
      * Returns true if $value is an hexdecimal value else false.
-     *
-     * @param mixed $value
-     * @return boolean
      */
-    public function apply($value)
+    public function apply(mixed $value): bool
     {
         return ctype_xdigit((string) $value);
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s must contain only hex values (0-9, A-F)';
     }

@@ -29,25 +29,18 @@ namespace PSX\Validate;
  */
 interface ValidatorInterface
 {
-    const THROW_ERRORS   = 1;
-    const COLLECT_ERRORS = 2;
+    public const THROW_ERRORS   = 1;
+    public const COLLECT_ERRORS = 2;
 
     /**
      * Goes through the data structure and calls for each property the
      * validateProperty method. Data must be an object structure
-     *
-     * @param mixed $data
-     * @return void
      */
-    public function validate($data);
+    public function validate(mixed $data): void;
 
     /**
      * Validates a specific property. Searches a fitting validation property
      * inside the list of available rules and applies all filters to the data
-     *
-     * @param string $path
-     * @param mixed $data
-     * @return void
      */
-    public function validateProperty($path, $data);
+    public function validateProperty(string $path, mixed $data): void;
 }

@@ -32,25 +32,18 @@ use InvalidArgumentException;
  */
 class Validate
 {
-    const TYPE_INTEGER = 'integer';
-    const TYPE_STRING  = 'string';
-    const TYPE_FLOAT   = 'float';
-    const TYPE_BOOLEAN = 'boolean';
-    const TYPE_ARRAY   = 'array';
-    const TYPE_OBJECT  = 'object';
+    public const TYPE_INTEGER = 'integer';
+    public const TYPE_STRING  = 'string';
+    public const TYPE_FLOAT   = 'float';
+    public const TYPE_BOOLEAN = 'boolean';
+    public const TYPE_ARRAY   = 'array';
+    public const TYPE_OBJECT  = 'object';
+    public const TYPE_ANY     = 'any';
 
     /**
-     * Applies filter on the given value and returns the value on success or
-     * throws an exception if an error occured
-     *
-     * @param string $value
-     * @param string $type
-     * @param \PSX\Validate\FilterInterface[]|callable $filters
-     * @param string $title
-     * @param boolean $required
-     * @return mixed
+     * Applies filter on the given value and returns the value on success or throws an exception if an error occurred
      */
-    public function apply($value, $type = self::TYPE_STRING, array $filters = array(), $title = null, $required = true)
+    public function apply(mixed $value, string $type = self::TYPE_STRING, array $filters = [], ?string $title = null, bool $required = true): mixed
     {
         $result = $this->validate($value, $type, $filters, $title, $required);
 
@@ -64,19 +57,11 @@ class Validate
     }
 
     /**
-     * Applies the $filter array containing PSX\Validate\FilterInterface on the
-     * $value. Returns a result object which contains the value and error
-     * messages from the filter. If $required is set to true an error will be
-     * added if the $value is null
-     *
-     * @param string $value
-     * @param string $type
-     * @param \PSX\Validate\FilterInterface[]|callable $filters
-     * @param string $title
-     * @param boolean $required
-     * @return \PSX\Validate\Result
+     * Applies the $filter array containing PSX\Validate\FilterInterface on the $value. Returns a result object which
+     * contains the value and error messages from the filter. If $required is set to true an error will be added if the
+     * $value is null
      */
-    public function validate($value, $type = self::TYPE_STRING, array $filters = array(), $title = null, $required = true)
+    public function validate(mixed $value, string $type = self::TYPE_STRING, array $filters = [], ?string $title = null, bool $required = true): Result
     {
         $result = new Result();
 
@@ -128,7 +113,7 @@ class Validate
         return $result;
     }
 
-    protected function transformType($value, $type)
+    protected function transformType(mixed $value, string $type): mixed
     {
         switch ($type) {
             case self::TYPE_INTEGER:

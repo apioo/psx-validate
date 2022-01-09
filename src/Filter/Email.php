@@ -33,16 +33,13 @@ class Email extends FilterAbstract
 {
     /**
      * Returns true if $value is a valid email address else false
-     *
-     * @param mixed $value
-     * @return string|false
      */
-    public function apply($value)
+    public function apply(mixed $value): mixed
     {
         return filter_var((string) $value, FILTER_VALIDATE_EMAIL);
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s must be a valid email format (user@domain.tld)';
     }

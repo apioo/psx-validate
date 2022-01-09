@@ -29,21 +29,21 @@ namespace PSX\Validate;
  */
 class Result
 {
-    protected $value;
-    protected $errors;
+    protected mixed $value;
+    protected array $errors;
 
-    public function __construct($value = null, array $errors = array())
+    public function __construct(mixed $value = null, array $errors = [])
     {
         $this->value  = $value;
         $this->errors = $errors;
     }
 
-    public function setValue($value)
+    public function setValue(mixed $value)
     {
         $this->value = $value;
     }
     
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
@@ -53,27 +53,27 @@ class Result
         $this->errors = $errors;
     }
     
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
 
-    public function addError($message)
+    public function addError(string $message)
     {
         $this->errors[] = $message;
     }
 
-    public function getFirstError()
+    public function getFirstError(): ?string
     {
-        return isset($this->errors[0]) ? $this->errors[0] : null;
+        return $this->errors[0] ?? null;
     }
 
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return count($this->errors) == 0;
     }
 
-    public function hasError()
+    public function hasError(): bool
     {
         return count($this->errors) > 0;
     }

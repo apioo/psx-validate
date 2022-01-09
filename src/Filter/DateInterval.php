@@ -31,7 +31,7 @@ use PSX\Validate\FilterAbstract;
  */
 class DateInterval extends FilterAbstract
 {
-    public function apply($value)
+    public function apply(mixed $value): bool
     {
         try {
             if (!empty($value) && !$value instanceof \DateInterval) {
@@ -44,7 +44,7 @@ class DateInterval extends FilterAbstract
         }
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s is not valid date interval';
     }

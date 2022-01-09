@@ -31,9 +31,9 @@ use PSX\Validate\FilterAbstract;
  */
 class Regexp extends FilterAbstract
 {
-    private $regexp;
+    private string $regexp;
 
-    public function __construct($regexp)
+    public function __construct(string $regexp)
     {
         $this->regexp = $regexp;
     }
@@ -41,16 +41,13 @@ class Regexp extends FilterAbstract
     /**
      * Returns true if the $exp valid for $value else false. This method is
      * called if you havent specify valid filter
-     *
-     * @param mixed $value
-     * @return boolean
      */
-    public function apply($value)
+    public function apply(mixed $value): bool
     {
         return preg_match($this->regexp, (string) $value) == 0 ? false : true;
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s is not a valid value';
     }

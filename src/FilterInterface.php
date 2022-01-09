@@ -33,18 +33,13 @@ interface FilterInterface
 {
     /**
      * Applies the filter to the $value
-     *
-     * @param mixed $value
-     * @return mixed
      */
-    public function apply($value);
+    public function apply(mixed $value): mixed;
 
     /**
      * A filter can overwrite this method to provide a custom error message.
      * The error message can contain one %s which is replaced with the name
      * of the field
-     *
-     * @return string
      */
-    public function getErrorMessage();
+    public function getErrorMessage(): ?string;
 }

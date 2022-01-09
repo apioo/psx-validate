@@ -33,11 +33,8 @@ class NotEmpty extends FilterAbstract
 {
     /**
      * Returns whether the value is empty or not
-     *
-     * @param mixed $value
-     * @return boolean
      */
-    public function apply($value)
+    public function apply(mixed $value): bool
     {
         return !empty($value);
     }

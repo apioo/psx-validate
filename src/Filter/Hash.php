@@ -32,9 +32,9 @@ use PSX\Validate\FilterAbstract;
  */
 class Hash extends FilterAbstract
 {
-    protected $algo;
+    private string $algo;
 
-    public function __construct($algo = 'sha1')
+    public function __construct(string $algo = 'sha1')
     {
         if (in_array($algo, hash_algos())) {
             $this->algo = $algo;
@@ -44,12 +44,9 @@ class Hash extends FilterAbstract
     }
 
     /**
-     * Returns an representation of $value depending on the selected algorithm
-     *
-     * @param mixed $value
-     * @return string
+     * Returns a representation of $value depending on the selected algorithm
      */
-    public function apply($value)
+    public function apply(mixed $value): string|bool
     {
         return hash($this->algo, (string) $value);
     }

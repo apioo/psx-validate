@@ -32,12 +32,9 @@ use PSX\Validate\FilterAbstract;
 class Md5 extends FilterAbstract
 {
     /**
-     * Returns an md5 representation of $value
-     *
-     * @param mixed $value
-     * @return string
+     * Returns a md5 representation of $value
      */
-    public function apply($value)
+    public function apply(mixed $value): string
     {
         return md5((string) $value);
     }

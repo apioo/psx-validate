@@ -32,18 +32,14 @@ use PSX\Validate\FilterAbstract;
 class Url extends FilterAbstract
 {
     /**
-     * Returns true if $value is a valid url with a flag scheme i.e. http://
-     * else false
-     *
-     * @param mixed $value
-     * @return string|false
+     * Returns true if $value is a valid url with a flag scheme i.e. http:// else false
      */
-    public function apply($value)
+    public function apply(mixed $value): mixed
     {
         return filter_var((string) $value, FILTER_VALIDATE_URL);
     }
 
-    public function getErrorMessage()
+    public function getErrorMessage(): ?string
     {
         return '%s must be a valid url format (http://domain.tld)';
     }
