@@ -24,6 +24,7 @@ use PHPUnit\Framework\TestCase;
 use PSX\Validate\Filter;
 use PSX\Validate\FilterAbstract;
 use PSX\Validate\Validate;
+use PSX\Validate\ValidationException;
 
 /**
  * ValidateTest
@@ -69,11 +70,10 @@ class ValidateTest extends TestCase
         $this->assertEquals('bar', $this->validate->apply('foo', Validate::TYPE_STRING, array($this->responseFilter)));
     }
 
-    /**
-     * @expectedException \PSX\Validate\ValidationException
-     */
     public function testApplyFailure()
     {
+        $this->expectException(ValidationException::class);
+
         $this->failureFilter->expects($this->once())
             ->method('apply')
             ->will($this->returnValue(false));
@@ -84,32 +84,31 @@ class ValidateTest extends TestCase
     public function testApplyType()
     {
         $this->assertEquals('foo', $this->validate->apply('foo', Validate::TYPE_STRING));
-        $this->assertInternalType(Validate::TYPE_STRING, $this->validate->apply('foo', Validate::TYPE_STRING));
+        $this->assertIsString($this->validate->apply('foo', Validate::TYPE_STRING));
 
         $this->assertEquals(0, $this->validate->apply('foo', Validate::TYPE_INTEGER));
-        $this->assertInternalType(Validate::TYPE_INTEGER, $this->validate->apply('foo', Validate::TYPE_INTEGER));
+        $this->assertIsInt($this->validate->apply('foo', Validate::TYPE_INTEGER));
 
         $this->assertEquals(0.0, $this->validate->apply('foo', Validate::TYPE_FLOAT));
-        $this->assertInternalType(Validate::TYPE_FLOAT, $this->validate->apply('foo', Validate::TYPE_FLOAT));
+        $this->assertIsFloat($this->validate->apply('foo', Validate::TYPE_FLOAT));
 
         $this->assertEquals(true, $this->validate->apply('foo', Validate::TYPE_BOOLEAN));
-        $this->assertInternalType(Validate::TYPE_BOOLEAN, $this->validate->apply('foo', Validate::TYPE_BOOLEAN));
+        $this->assertIsBool($this->validate->apply('foo', Validate::TYPE_BOOLEAN));
 
         $this->assertEquals(array('foo'), $this->validate->apply('foo', Validate::TYPE_ARRAY));
-        $this->assertInternalType(Validate::TYPE_ARRAY, $this->validate->apply('foo', Validate::TYPE_ARRAY));
+        $this->assertIsArray($this->validate->apply('foo', Validate::TYPE_ARRAY));
 
         $expect = new \stdClass();
         $expect->scalar = 'foo';
 
         $this->assertEquals($expect, $this->validate->apply('foo', Validate::TYPE_OBJECT));
-        $this->assertInternalType(Validate::TYPE_OBJECT, $this->validate->apply('foo', Validate::TYPE_OBJECT));
+        $this->assertIsObject($this->validate->apply('foo', Validate::TYPE_OBJECT));
     }
 
-    /**
-     * @expectedException \PSX\Validate\ValidationException
-     */
     public function testApplyRequiredNull()
     {
+        $this->expectException(ValidationException::class);
+
         $this->validate->apply(null, Validate::TYPE_STRING, [], 'bar', true);
     }
 
@@ -128,19 +127,17 @@ class ValidateTest extends TestCase
         $this->assertEquals('foo', $this->validate->apply('foo', Validate::TYPE_STRING, [], 'bar', false));
     }
 
-    /**
-     * @expectedException \PSX\Validate\ValidationException
-     */
     public function testApplyRequiredValueFilterInvalid()
     {
+        $this->expectException(ValidationException::class);
+
         $this->validate->apply('foo-', Validate::TYPE_STRING, [new Filter\Alnum()], 'bar', true);
     }
 
-    /**
-     * @expectedException \PSX\Validate\ValidationException
-     */
     public function testApplyOptionalValueFilterInvalid()
     {
+        $this->expectException(ValidationException::class);
+
         $this->validate->apply('foo-', Validate::TYPE_STRING, [new Filter\Alnum()], 'bar', false);
     }
 
@@ -149,11 +146,10 @@ class ValidateTest extends TestCase
         $this->assertEquals('foo', $this->validate->apply('foo', Validate::TYPE_STRING, array(new Filter\Alnum())));
     }
 
-    /**
-     * @expectedException \PSX\Validate\ValidationException
-     */
     public function testApplyFilterInvalid()
     {
+        $this->expectException(ValidationException::class);
+
         $this->assertEquals('foo', $this->validate->apply('foo-', Validate::TYPE_STRING, array(new Filter\Alnum())));
     }
 
@@ -164,21 +160,19 @@ class ValidateTest extends TestCase
         })));
     }
 
-    /**
-     * @expectedException \PSX\Validate\ValidationException
-     */
     public function testApplyFilterCallableInvalid()
     {
+        $this->expectException(ValidationException::class);
+
         $this->assertEquals('foo', $this->validate->apply('foo', Validate::TYPE_STRING, array(function ($value) {
             return false;
         })));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testApplyInvalidFilterType()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->assertEquals('foo', $this->validate->apply('foo', Validate::TYPE_STRING, array('foo')));
     }
 

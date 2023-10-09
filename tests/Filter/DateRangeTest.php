@@ -97,11 +97,10 @@ class DateRangeTest extends FilterTestCase
         $this->assertFalse($filter->apply('foo'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testEmptyConstructor()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         new DateRange();
     }
 }
