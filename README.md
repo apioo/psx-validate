@@ -1,8 +1,6 @@
 
 # Validate
 
-## About
-
 Validation library which validates arbitrary data using a flexible filter system.
 
 ## Usage
