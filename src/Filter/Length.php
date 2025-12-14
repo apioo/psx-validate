@@ -54,7 +54,7 @@ class Length extends FilterAbstract
         } else {
             $value = (string) $value;
 
-            return $this->compare(strlen($value));
+            return $this->compare(mb_strlen($value));
         }
     }
 
