@@ -20,6 +20,7 @@
 
 namespace PSX\Validate\Tests;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use PSX\Validate\Filter;
 use PSX\Validate\FilterAbstract;
@@ -58,11 +59,11 @@ class ValidateTest extends TestCase
     {
         $this->successFilter->expects($this->once())
             ->method('apply')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->responseFilter->expects($this->once())
             ->method('apply')
-            ->will($this->returnValue('bar'));
+            ->willReturn('bar');
 
         $this->assertEquals('foo', $this->validate->apply('foo', Validate::TYPE_STRING));
         $this->assertEquals('foo', $this->validate->apply('foo', Validate::TYPE_STRING, array()));
@@ -76,7 +77,7 @@ class ValidateTest extends TestCase
 
         $this->failureFilter->expects($this->once())
             ->method('apply')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $this->assertEquals(false, $this->validate->apply('foo', Validate::TYPE_STRING, array($this->failureFilter)));
     }
@@ -171,7 +172,7 @@ class ValidateTest extends TestCase
 
     public function testApplyInvalidFilterType()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $this->assertEquals('foo', $this->validate->apply('foo', Validate::TYPE_STRING, array('foo')));
     }

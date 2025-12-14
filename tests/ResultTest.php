@@ -48,5 +48,12 @@ class ResultTest extends TestCase
         $this->assertFalse($result->isSuccessful());
         $this->assertTrue($result->hasError());
         $this->assertEquals('Another error, More errors', $result->__toString());
+
+        $this->assertSame(0, $result->getInt());
+        $this->assertSame('bar', $result->getString());
+        $this->assertSame(0.0, $result->getFloat());
+        $this->assertSame(true, $result->getBoolean());
+        $this->assertSame(['bar'], $result->getArray());
+        $this->assertEquals((object) ['scalar' => 'bar'], $result->getObject());
     }
 }
