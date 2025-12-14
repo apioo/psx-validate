@@ -20,6 +20,7 @@
 
 namespace PSX\Validate\Filter;
 
+use DateTimeInterface;
 use InvalidArgumentException;
 
 /**
@@ -31,10 +32,10 @@ use InvalidArgumentException;
  */
 class DateRange extends DateTime
 {
-    private ?\DateTimeInterface $from;
-    private ?\DateTimeInterface $to;
+    private ?DateTimeInterface $from;
+    private ?DateTimeInterface $to;
 
-    public function __construct(\DateTimeInterface $from = null, \DateTimeInterface $to = null, ?string $format = null)
+    public function __construct(?DateTimeInterface $from = null, ?DateTimeInterface $to = null, ?string $format = null)
     {
         parent::__construct($format);
 
@@ -50,7 +51,7 @@ class DateRange extends DateTime
     {
         $date = parent::apply($value);
         
-        if ($date instanceof \DateTimeInterface) {
+        if ($date instanceof DateTimeInterface) {
             $inRange = false;
 
             if ($this->from !== null && $this->to !== null) {
