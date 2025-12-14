@@ -40,7 +40,7 @@ class Regexp extends FilterAbstract
 
     /**
      * Returns true if the $exp valid for $value else false. This method is
-     * called if you havent specify valid filter
+     * called if you haven't specify valid filter
      */
     public function apply(mixed $value): bool
     {
