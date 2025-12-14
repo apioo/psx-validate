@@ -43,7 +43,7 @@ class Validate
     /**
      * Applies filter on the given value and returns the value on success or throws an exception if an error occurred
      */
-    public function apply(mixed $value, string $type = self::TYPE_STRING, array $filters = [], ?string $title = null, bool $required = true): mixed
+    public function apply(mixed $value, string|DataType $type = DataType::STRING, array $filters = [], ?string $title = null, bool $required = true): mixed
     {
         $result = $this->validate($value, $type, $filters, $title, $required);
 
@@ -61,8 +61,12 @@ class Validate
      * contains the value and error messages from the filter. If $required is set to true an error will be added if the
      * $value is null
      */
-    public function validate(mixed $value, string $type = self::TYPE_STRING, array $filters = [], ?string $title = null, bool $required = true): Result
+    public function validate(mixed $value, string|DataType $type = DataType::STRING, array $filters = [], ?string $title = null, bool $required = true): Result
     {
+        if (is_string($type)) {
+            $type = DataType::from($type);
+        }
+
         $result = new Result();
 
         if ($title === null) {
@@ -113,29 +117,16 @@ class Validate
         return $result;
     }
 
-    protected function transformType(mixed $value, string $type): mixed
+    private function transformType(mixed $value, DataType $type): mixed
     {
-        switch ($type) {
-            case self::TYPE_INTEGER:
-                return (int) $value;
-
-            case self::TYPE_STRING:
-                return (string) $value;
-
-            case self::TYPE_FLOAT:
-                return (float) $value;
-
-            case self::TYPE_BOOLEAN:
-                return (bool) $value;
-
-            case self::TYPE_ARRAY:
-                return (array) $value;
-
-            case self::TYPE_OBJECT:
-                return (object) $value;
-
-            default:
-                return $value;
-        }
+        return match ($type) {
+            DataType::INTEGER => (int) $value,
+            DataType::STRING => (string) $value,
+            DataType::FLOAT => (float) $value,
+            DataType::BOOLEAN => (bool) $value,
+            DataType::ARRAY => (array) $value,
+            DataType::OBJECT => (object) $value,
+            default => $value,
+        };
     }
 }
