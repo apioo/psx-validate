@@ -45,7 +45,7 @@ class KeyExists extends FilterAbstract
     {
         $key = (string) $value;
 
-        return isset($this->container[$key]);
+        return array_key_exists($key, $this->container);
     }
 
     public function getErrorMessage(): ?string
